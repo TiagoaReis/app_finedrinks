@@ -22,4 +22,4 @@ For run
 npx react-native run-android
 ```
 
--
+
