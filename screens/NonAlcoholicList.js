@@ -9,19 +9,20 @@ import {
   FlatList,
   StyleSheet,
 } from 'react-native';
-import {icons, COLORS, FONTS, SIZES} from '../constants';
-import axios from 'axios';
-import API_URL from './../services/api.service';
-
+import {COLORS, FONTS, SIZES} from '../constants';
+import {useDispatch, useSelector} from 'react-redux';
+import {getNonAlcoholicList} from '../store/modules/nonAlcoholic/actions';
 export default function NonAlcoholicList({route, navigation}) {
   useEffect(() => {
     getNonAlcoholic();
   }, []);
+  const dispatch = useDispatch();
+  const drinks = useSelector((state) => state.nonAlcoholic.drinks);
 
-  const [drinks, setDrinks] = React.useState({
-    drinks: [],
-  });
-  console.log(drinks);
+  function getNonAlcoholic() {
+    dispatch(getNonAlcoholicList());
+  }
+
   const renderCard = ({item}) => {
     return (
       <View style={{paddingTop: 50}}>
@@ -92,19 +93,6 @@ export default function NonAlcoholicList({route, navigation}) {
       />
     </View>
   );
-  function getNonAlcoholic() {
-    console.log('item ->');
-    console.log();
-    axios
-      .get(`${API_URL}/filter.php?a=Non_Alcoholic`)
-      .then((resposta) => {
-        const data = resposta.data;
-        setDrinks(data);
-      })
-      .catch((erro) => {
-        console.log(erro);
-      });
-  }
 }
 const styles = StyleSheet.create({
   container: {

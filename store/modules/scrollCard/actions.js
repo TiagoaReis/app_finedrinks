@@ -6,7 +6,6 @@ import API_URL from '../../../services/api.service';
 export function getScrollCard() {
   return (dispatch) => {
     return axios.get(`${API_URL}/filter.php?a=Alcoholic`).then((response) => {
-      console.log(response.data);
       dispatch(getItemScrollCard(response.data));
     });
   };
