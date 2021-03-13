@@ -4,18 +4,22 @@ import React, {useEffect, useState} from 'react';
 import {View, Text} from 'react-native';
 import {COLORS, FONTS, SIZES} from '../../constants';
 import ScrollCard from '../components/ScrollCard';
-import axios from 'axios';
-import API_URL from './../../services/api.service';
+
+import {useDispatch, useSelector} from 'react-redux';
+import {getScrollCard} from '../../store/modules/scrollCard/actions';
 
 function renderTitle({title, navigation, productList}) {
   useEffect(() => {
-    getAlcoholic();
+    getItem();
   }, []);
 
-  //const API_URL = config.API_URL;
-  const [Alcoholic, setAlcoholic] = useState({
-    drinks: [],
-  });
+  const dispatch = useDispatch();
+  const Alcoholic = useSelector((state) => state.scrollCard.drinks);
+
+  function getItem() {
+    dispatch(getScrollCard());
+  }
+
   return (
     <View
       style={{
@@ -32,17 +36,6 @@ function renderTitle({title, navigation, productList}) {
       </View>
     </View>
   );
-  function getAlcoholic() {
-    axios
-      .get(`${API_URL}/filter.php?a=Alcoholic`)
-      .then((resposta) => {
-        const data = resposta.data;
-        setAlcoholic(data);
-      })
-      .catch((erro) => {
-        console.log(erro);
-      });
-  }
 }
 
 export default renderTitle;

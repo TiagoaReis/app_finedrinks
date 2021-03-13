@@ -1,21 +1,19 @@
 import React from 'react';
-import {connect, useDispatch, useSelector} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {loadItem}  from '../../store/modules/random/actions';
+import {useDispatch, useSelector} from 'react-redux';
+import {loadItem} from '../../store/modules/random/actions';
 import {icons, COLORS, FONTS, SIZES} from '../../constants';
 import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 
-function renderSpecialCard({ }) {
-
-  const dispatch = useDispatch()
-  const drinksRandom = useSelector(state => state.random.drinks)
+function renderSpecialCard({}) {
+  const dispatch = useDispatch();
+  const drinksRandom = useSelector((state) => state.random.drinks);
   const name = drinksRandom.drinks.map((names) => names.strDrink);
   const image = drinksRandom.drinks.map((image) => image.strDrinkThumb);
   const category = drinksRandom.drinks.map((category) => category.strCategory);
 
-function handleloadItem(){
-  dispatch(loadItem())
-}
+  function handleloadItem() {
+    dispatch(loadItem());
+  }
 
   return (
     <View>
