@@ -1,12 +1,11 @@
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
+import API_URL from '../../../services/api.service';
 
 export function getScrollCardMini() {
   return (dispatch) => {
     return axios
-      .get(
-        'https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic',
-      )
+      .get(`${API_URL}/filter.php?a=Non_Alcoholic`)
       .then((response) => {
         console.log(response.data);
         dispatch(getItemScrollCardMini(response.data));

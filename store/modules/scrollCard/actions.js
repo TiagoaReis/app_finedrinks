@@ -1,15 +1,14 @@
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
+import API_URL from '../../../services/api.service';
 
 //special Random
 export function getScrollCard() {
   return (dispatch) => {
-    return axios
-      .get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic')
-      .then((response) => {
-        console.log(response.data);
-        dispatch(getItemScrollCard(response.data));
-      });
+    return axios.get(`${API_URL}/filter.php?a=Alcoholic`).then((response) => {
+      console.log(response.data);
+      dispatch(getItemScrollCard(response.data));
+    });
   };
 }
 

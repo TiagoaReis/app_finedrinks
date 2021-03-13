@@ -1,16 +1,14 @@
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
+import API_URL from '../../../services/api.service';
 
 //special Random
 export function loadItem() {
   console.log('load');
   return (dispatch) => {
-    return axios
-      .get('https://www.thecocktaildb.com/api/json/v1/1/random.php')
-      .then((response) => {
-        //console.log(response.data));
-        dispatch(getItemRandom(response.data));
-      });
+    return axios.get(`${API_URL}/random.php`).then((response) => {
+      dispatch(getItemRandom(response.data));
+    });
   };
 }
 
