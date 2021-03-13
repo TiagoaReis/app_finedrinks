@@ -13,7 +13,7 @@ const INITIAL_STATE = {
   },
 };
 
-const mainReducer = (state = INITIAL_STATE, action) => {
+const randomReducer = (state = INITIAL_STATE, action) => {
   console.log('reducer');
   console.log(action.item);
   if (action.type === 'GET_ITEM_RANDOM') {
@@ -27,4 +27,4 @@ const mainReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default mainReducer;
+export default randomReducer;

@@ -5,7 +5,7 @@ import RenderSpecialCard from './components/SpecialRandom';
 import RenderTitle from './components/renderTitle';
 import ScrollMenu from './components/ScrollMenu';
 import ScrollCardMini from './components/ScrollCardMini';
-//import {connect} from 'react-redux';
+
 import {
   StyleSheet,
   SafeAreaView,
@@ -20,8 +20,7 @@ import {images, icons, COLORS, FONTS, SIZES} from '../constants';
 import API_URL from './../services/api.service';
 
 const Home = ({navigation}) => {
-  useEffect(() => {
-    ramdonItem();
+  useEffect(() => {    
     getCategories();
   }, []);
 
@@ -47,18 +46,7 @@ const Home = ({navigation}) => {
     ],
   });
 
-  function ramdonItem() {
-    axios
-      .get(`${API_URL}/random.php`)
-      .then((resposta) => {
-        const data = resposta.data;
-        setEspecial(data.drinks[0]);
-      })
-      .catch((erro) => {
-        console.log(erro);
-      });
-  }
-
+  
   function getCategories() {
     axios
       .get(`${API_URL}/list.php?c=list`)

@@ -11,12 +11,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 
 //redux
-import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import thunk from 'redux-thunk';
-import combineReducers from './store/reducers/index';
-
-let store = createStore(combineReducers, applyMiddleware(thunk));
+import store from './store/index'
 
 // screens
 import {Home, ItemDetail, CategoryList, NonAlcoholicList} from './screens/';

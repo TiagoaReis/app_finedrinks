@@ -1,18 +1,21 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react/react-in-jsx-scope */
 import React from 'react';
-import {connect} from 'react-redux';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {loadItem} from '../../store/actions/index';
-import * as actionCreators from './../../store/actions/index';
+import {loadItem}  from '../../store/modules/random/actions';
 import {icons, COLORS, FONTS, SIZES} from '../../constants';
 import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 
-function renderSpecialCard({item, loadItem}) {
-  const name = item.drinks.map((names) => names.strDrink);
-  const image = item.drinks.map((image) => image.strDrinkThumb);
-  const category = item.drinks.map((category) => category.strCategory);
+function renderSpecialCard({ }) {
+
+  const dispatch = useDispatch()
+  const drinksRandom = useSelector(state => state.random.drinks)
+  const name = drinksRandom.drinks.map((names) => names.strDrink);
+  const image = drinksRandom.drinks.map((image) => image.strDrinkThumb);
+  const category = drinksRandom.drinks.map((category) => category.strCategory);
+
+function handleloadItem(){
+  dispatch(loadItem())
+}
 
   return (
     <View>
@@ -73,7 +76,7 @@ function renderSpecialCard({item, loadItem}) {
               width: 50,
               borderRadius: 10,
             }}
-            onPress={() => loadItem()}>
+            onPress={(e) => handleloadItem()}>
             <Image
               source={icons.chevron}
               resizeMode="contain"
@@ -104,10 +107,5 @@ const styles = StyleSheet.create({
     elevation: 9,
   },
 });
-const mapStateToProps = (state) => ({
-  item: state.drinks,
-});
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(actionCreators, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(renderSpecialCard);
+export default renderSpecialCard;
