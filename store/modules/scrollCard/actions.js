@@ -3,7 +3,6 @@ import axios from 'axios';
 
 //special Random
 export function getScrollCard() {
-  //console.log('chegou no card redux');
   return (dispatch) => {
     return axios
       .get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic')
