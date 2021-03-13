@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import axios from 'axios';
 
-//special Random
 export function getScrollCardMini() {
   return (dispatch) => {
     return axios
