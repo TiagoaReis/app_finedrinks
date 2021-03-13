@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {View, Image, TouchableOpacity, FlatList} from 'react-native';
-import API_URL from './../../services/api.service';
-import axios from 'axios';
+import {useDispatch, useSelector} from 'react-redux';
+import {getScrollCardMini} from '../../store/modules/scrollCardMini/actions';
 
 import {COLORS, SIZES} from '../../constants';
 function ScrollCardMini({navigation}) {
@@ -11,9 +11,9 @@ function ScrollCardMini({navigation}) {
     getItems();
   }, []);
 
-  const [drinks, setDrinks] = useState({
-    drinks: [],
-  });
+  const dispatch = useDispatch();
+  const drinks = useSelector((state) => state.scrollCardMini.drinks);
+
   const renderCard = ({item}) => (
     <TouchableOpacity
       // eslint-disable-next-line react-native/no-inline-styles
@@ -62,15 +62,7 @@ function ScrollCardMini({navigation}) {
   );
 
   function getItems() {
-    axios
-      .get(`${API_URL}/filter.php?a=Non_Alcoholic`)
-      .then((resposta) => {
-        const data = resposta.data;
-        setDrinks(data);
-      })
-      .catch((erro) => {
-        console.log(erro);
-      });
+    dispatch(getScrollCardMini());
   }
 }
 
